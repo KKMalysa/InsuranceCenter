@@ -40,14 +40,14 @@ public class CompanyClientComponnent {
     }
 
     /**
-     * @TODO - futurede velop
+     * @TODO  (futurede velop)
      *  If @param productNumber is <1 than comes a risk of potential fraud.
      *  emplyee needs to check, if the client is getting multiple insurance for the same object,
      *  if so, than there needs to be a currency period, if no, than he can get a discount for a frequent customer.
      *
      */
     public List<CompanyClientDto> findMultipleInsuredClients () {
-        return companyClientRepository.findAll().stream().filter(companyClient -> companyClient.getInsuranceList().size() > 1)
+        return companyClientRepository.findAll().stream().filter(companyClient -> companyClient.getMotorcarList().size() > 1)
                 .map(CompanyClientDto::new)
                 .collect(Collectors.toList());
 

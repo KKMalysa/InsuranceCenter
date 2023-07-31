@@ -1,10 +1,13 @@
 package com.karolmalysa.insurancecenter.model.dto;
 
 import com.karolmalysa.insurancecenter.model.entities.CompanyClient;
+import com.karolmalysa.insurancecenter.model.entities.Motorcar;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -24,7 +27,7 @@ public class CompanyClientDto {
 
     private String phone;
 
-    private List<String> insuranceList;
+    private List<Long> motorcarList;
 
 
 
@@ -37,6 +40,7 @@ public class CompanyClientDto {
         companyClient.setPesel(this.pesel);
         companyClient.setAddress(this.address);
         companyClient.setPhone(this.phone);
+        companyClient.setMotorcarList(new ArrayList<>());
 
         return companyClient;
     }
@@ -48,5 +52,6 @@ public class CompanyClientDto {
        this.pesel = companyClient.getPesel();
        this.address = companyClient.getAddress();
        this.phone = companyClient.getPhone();
+       this.motorcarList = companyClient.getMotorcarList().stream().map(Motorcar::getId).collect(Collectors.toList());
     }
 }

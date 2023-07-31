@@ -1,15 +1,14 @@
 package com.karolmalysa.insurancecenter.model.entities;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "CompanyClient")
+@Table(name = "employee")
 @Data
-public class CompanyClient {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +20,13 @@ public class CompanyClient {
     @Column(name = "surname", unique = false, nullable = false)
     private String surname;
 
-    @Column(name = "PESEL", unique = true, nullable = false)
-    private String pesel;
-
-    @Column(name = "address", unique = false, nullable = false)
-    private String address;
+    @Column(name = "role", unique = false, nullable = false)
+    private String role;
 
     @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "companyClient")
-    private List<Motorcar> motorcarList;
-
+    @ManyToOne
+    @JoinColumn(name = "idClaim", nullable = false)
+    private Claim claim;
 }

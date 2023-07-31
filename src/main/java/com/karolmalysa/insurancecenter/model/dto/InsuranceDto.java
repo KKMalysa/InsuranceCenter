@@ -1,9 +1,15 @@
 package com.karolmalysa.insurancecenter.model.dto;
 
-import com.karolmalysa.insurancecenter.model.entities.CompanyClient;
+import com.karolmalysa.insurancecenter.model.entities.Claim;
 import com.karolmalysa.insurancecenter.model.entities.Insurance;
+import com.karolmalysa.insurancecenter.model.entities.Motorcar;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -15,24 +21,28 @@ public class InsuranceDto {
 
     private  String name;
 
-    private Long amount = 1L;
+    private Date startDate;
 
+    private Date endDate;
     private  Float price; //BigDecimal?
 
-    private Long idCompanyClient;
+    private Long idMotorcar;
+
+    private List<Long> claimList;
 
 
     public Insurance createEntity() {
 
-        CompanyClient companyClient = new CompanyClient();
-        companyClient.setId(this.idCompanyClient);
+        Motorcar motorcar = new Motorcar();
+        motorcar.setId(this.idMotorcar);
         Insurance insurance = new Insurance();
 
         insurance.setName(this.name);
-        insurance.setAmount(this.amount);
+        insurance.setStartDate(this.startDate);
+        insurance.setEndDate(this.endDate);
         insurance.setPrice(this.price);
-        insurance.setCompanyClient(companyClient); //podając samo id silnik doda relacje do tego klienta nawet jak się go nie pobierze z bazy danych. thanks K.W. ;)
-
+        insurance.setMotorcar(motorcar);            // thanks K.W. ;)
+        insurance.setClaimList(new ArrayList<>());
 
         return insurance;
     }
@@ -40,8 +50,10 @@ public class InsuranceDto {
     public InsuranceDto(Insurance insurance) {
         this.id = insurance.getId();
         this.name = insurance.getName();
-        this.amount = insurance.getAmount();
-       this.price = insurance.getPrice();
-        this.idCompanyClient = insurance.getCompanyClient().getId();
+        this.startDate = insurance.getStartDate();
+        this.endDate = insurance.getEndDate();
+        this.price = insurance.getPrice();
+        this.idMotorcar = insurance.getMotorcar().getId();
+        this.claimList = insurance.getClaimList().stream().map(Claim::getId).collect(Collectors.toList());
     }
 }
