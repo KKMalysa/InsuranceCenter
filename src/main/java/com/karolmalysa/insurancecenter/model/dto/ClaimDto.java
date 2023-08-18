@@ -24,11 +24,11 @@ public class ClaimDto {
 
     private  String description;
 
-    private  String decision;
+    private ClaimStatus claimStatus;
 
     private  Long idInsurance;
 
-    private  List<Long> employeeList;
+//    private  List<Long> employeeList;
 
 
     public Claim createEntity() {
@@ -39,9 +39,9 @@ public class ClaimDto {
 
         claim.setDateOfIncident(this.dateOfIncident);
         claim.setDescription(this.description);
-        claim.setDecision(this.decision);
+        claim.setClaimStatus(this.claimStatus);
         claim.setInsurance(insurance);
-        claim.setEmployeeList(new ArrayList<>());
+//        claim.setEmployeeList(new ArrayList<>());
 
         return claim;
     }
@@ -50,7 +50,7 @@ public class ClaimDto {
         this.id = claim.getId();
         this.dateOfIncident = claim.getDateOfIncident();
         this.description = claim.getDescription();
-        this.decision = claim.getDecision();
+        this.claimStatus = claim.getClaimStatus();
         this.idInsurance = claim.getInsurance().getId();
     }
 

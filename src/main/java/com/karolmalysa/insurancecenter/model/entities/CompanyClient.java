@@ -1,11 +1,19 @@
 package com.karolmalysa.insurancecenter.model.entities;
 
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "CompanyClient")
 @Data
@@ -13,13 +21,16 @@ public class CompanyClient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(name = "name", unique = false, nullable = false)
-    private String name;
+    private String firstName;
 
     @Column(name = "surname", unique = false, nullable = false)
-    private String surname;
+    private String lastName;
+
+    @Column(name = "dateOfBirth", unique = false, nullable = true)
+    private LocalDate dateOfBirth;
 
     @Column(name = "PESEL", unique = true, nullable = false)
     private String pesel;
@@ -30,7 +41,17 @@ public class CompanyClient {
     @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "companyClient")
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", unique = false, nullable = false)
+    private UserRoles role;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    @OneToMany(mappedBy = "companyClient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Motorcar> motorcarList;
 
 }

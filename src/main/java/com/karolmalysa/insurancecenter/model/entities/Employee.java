@@ -20,13 +20,17 @@ public class Employee {
     @Column(name = "surname", unique = false, nullable = false)
     private String surname;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", unique = false, nullable = false)
-    private String role;
+    private UserRoles role;
 
     @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "idClaim", nullable = false)
-    private Claim claim;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+//    @ManyToOne
+//    @JoinColumn(name = "idClaim", nullable = false)
+//    private Claim claim;
 }
