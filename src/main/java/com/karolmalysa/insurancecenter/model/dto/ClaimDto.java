@@ -1,17 +1,12 @@
 package com.karolmalysa.insurancecenter.model.dto;
 
-import com.karolmalysa.insurancecenter.model.entities.*;
+import com.karolmalysa.insurancecenter.model.entities.Claim;
+import com.karolmalysa.insurancecenter.model.entities.ClaimStatus;
+import com.karolmalysa.insurancecenter.model.entities.Insurance;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -28,6 +23,10 @@ public class ClaimDto {
 
     private  Long idInsurance;
 
+    private byte[] fileContent;
+
+    private byte[] imageContent;
+
 //    private  List<Long> employeeList;
 
 
@@ -41,6 +40,8 @@ public class ClaimDto {
         claim.setDescription(this.description);
         claim.setClaimStatus(this.claimStatus);
         claim.setInsurance(insurance);
+        claim.setFileContent(this.fileContent);
+        claim.setImageContent(this.imageContent);
 //        claim.setEmployeeList(new ArrayList<>());
 
         return claim;
@@ -52,6 +53,8 @@ public class ClaimDto {
         this.description = claim.getDescription();
         this.claimStatus = claim.getClaimStatus();
         this.idInsurance = claim.getInsurance().getId();
+        this.fileContent = claim.getFileContent();
+        this.imageContent = claim.getImageContent();
     }
 
 }

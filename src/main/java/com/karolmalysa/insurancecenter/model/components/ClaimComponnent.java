@@ -37,14 +37,13 @@ public class ClaimComponnent {
 
     }
 
-    /** pagination */
+
     public List<ClaimDto> findAll (Integer pageNumber, Integer pageSize) {
         return claimRepository.findAll(PageRequest.of(pageNumber, pageSize)).stream()
                 .map(claim -> new ClaimDto(claim))
                 .collect(Collectors.toList());
     }
 
-    /** --------------------------------------------------------------------------------  */
     public Claim getClaimById(Long claimId ) {
         return claimRepository.findById(claimId)
                 .orElseThrow(() -> new ResourceNotFoundException("Claim ", "Claim id", "" + claimId));

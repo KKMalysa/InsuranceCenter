@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +26,14 @@ public class Claim {
 
     @Enumerated(EnumType.STRING)
     private ClaimStatus claimStatus;
+
+    @Column(name = "file_content")
+    @Lob
+    private byte[] fileContent;
+
+    @Column(name = "image_content")
+    @Lob
+    private byte[] imageContent;
 
 
 //    @OneToMany(mappedBy = "claim")
