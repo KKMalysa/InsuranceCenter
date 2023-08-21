@@ -66,4 +66,5 @@ public class ClaimComponnent {
         return claimRepository.save(newClaim);
     }
 
+
 }

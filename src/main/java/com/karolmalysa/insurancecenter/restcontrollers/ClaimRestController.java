@@ -40,10 +40,15 @@ public class ClaimRestController {
         return  claimComponnent.findAll(pageNumber, pageSize);
     }
 
-    /** ------------------------------------------------------------------------------------- */
+
     @GetMapping("/{id}")
     public ResponseEntity<Claim> getClaimById(@PathVariable("id") Long id){
-        return new ResponseEntity<Claim>(claimComponnent.getClaimById(id), HttpStatus.OK);
+//        return new ResponseEntity<Claim>(claimComponnent.getClaimById(id), HttpStatus.OK); // zwraca 200 nawet jeśli claim jest nullem
+        Claim claim = claimComponnent.getClaimById(id);
+        if (claim == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(claim, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -155,7 +160,7 @@ public class ClaimRestController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);  // Zakładając, że zdjęcie to JPEG
+        headers.setContentType(MediaType.IMAGE_JPEG);  // Zakładam, że zdjęcie to JPEG
 
         return ResponseEntity.ok()
                 .headers(headers)

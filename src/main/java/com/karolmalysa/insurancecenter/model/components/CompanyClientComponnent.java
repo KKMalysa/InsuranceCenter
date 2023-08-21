@@ -4,11 +4,8 @@ import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
 import com.karolmalysa.insurancecenter.model.dao.CompanyClientRepository;
 import com.karolmalysa.insurancecenter.model.dto.CompanyClientDto;
 import com.karolmalysa.insurancecenter.model.entities.CompanyClient;
-import com.karolmalysa.insurancecenter.model.entities.Employee;
-import com.karolmalysa.insurancecenter.model.entities.UserRoles;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -81,13 +77,6 @@ public class CompanyClientComponnent implements UserDetailsService {
 
     }
 
-    /**
-     * @TODO  (futurede velop)
-     *  If @param productNumber is <1 than comes a risk of potential fraud.
-     *  emplyee needs to check, if the client is getting multiple insurance for the same object,
-     *  if so, than there needs to be a currency period, if no, than he can get a discount for a frequent customer.
-     *
-     */
     public List<CompanyClientDto> findMultipleInsuredClients () {
         return companyClientRepository.findAll().stream().filter(companyClient -> companyClient.getMotorcarList().size() > 1)
                 .map(CompanyClientDto::new)
