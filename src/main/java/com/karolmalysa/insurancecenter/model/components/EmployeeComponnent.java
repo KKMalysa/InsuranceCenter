@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class EmployeeComponent implements UserDetailsService {
+public class EmployeeComponnent implements UserDetailsService {
 
     private final EmployeeRepository employeeRepository;
 

@@ -55,5 +55,6 @@ public class InsuranceDto {
         this.price = insurance.getPrice();
         this.idMotorcar = insurance.getMotorcar().getId();
         this.claimList = insurance.getClaimList().stream().map(Claim::getId).collect(Collectors.toList());
+
     }
 }

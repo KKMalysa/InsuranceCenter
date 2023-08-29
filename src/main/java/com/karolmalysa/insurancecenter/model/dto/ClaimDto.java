@@ -6,6 +6,8 @@ import com.karolmalysa.insurancecenter.model.entities.Insurance;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -26,6 +28,8 @@ public class ClaimDto {
     private byte[] fileContent;
 
     private byte[] imageContent;
+    private BigDecimal amount;
+    private LocalDate dateFiled;
 
 //    private  List<Long> employeeList;
 
@@ -55,6 +59,18 @@ public class ClaimDto {
         this.idInsurance = claim.getInsurance().getId();
         this.fileContent = claim.getFileContent();
         this.imageContent = claim.getImageContent();
+    }
+
+    public void setStatus(ClaimStatus status) {
+        this.claimStatus = status;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setDateFiled(LocalDate dateFiled) {
+        this.dateFiled = dateFiled;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.karolmalysa.insurancecenter.config;
 
 import com.karolmalysa.insurancecenter.model.components.CompanyClientComponnent;
-import com.karolmalysa.insurancecenter.model.components.EmployeeComponent;
+import com.karolmalysa.insurancecenter.model.components.EmployeeComponnent;
 import com.karolmalysa.insurancecenter.model.entities.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,17 +10,18 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private EmployeeComponent employeeComponent;
+    private EmployeeComponnent employeeComponnent;
     @Autowired
     private CompanyClientComponnent companyClientComponnent;
 
@@ -38,14 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-//        http.logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID")
-//                .permitAll();
+//        http.oauth2Login()
+//                .successHandler(oauth2AuthenticationSuccessHandler());
+
     }
 
+    @Bean
+    public AuthenticationSuccessHandler oauth2AuthenticationSuccessHandler() {
+        return new SimpleUrlAuthenticationSuccessHandler("/successfulLogin");
+    }
 
 
     @Override
@@ -60,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("client1").password(encoder.encode("1234")).roles(String.valueOf(UserRoles.CLIENT_PREMIUM));
 
-        auth.userDetailsService(employeeComponent)
+        auth.userDetailsService(employeeComponnent)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
 
         auth.userDetailsService(companyClientComponnent)
