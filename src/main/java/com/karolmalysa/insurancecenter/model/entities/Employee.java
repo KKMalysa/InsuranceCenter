@@ -1,9 +1,10 @@
 package com.karolmalysa.insurancecenter.model.entities;
 
+import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
+import com.karolmalysa.insurancecenter.model.dao.EmployeeRepository;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -29,6 +30,20 @@ public class Employee {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
+    @Column(name = "password", unique = false, nullable = false)
+    private String password;
+
+    private static EmployeeRepository employeeRepository;
+
+    public static String deleteEmployee(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "employeeId", id.toString()));
+        employeeRepository.delete(employee);
+
+        return "Employee data has been deleted successfully...";
+    }
+
 
 //    @ManyToOne
 //    @JoinColumn(name = "idClaim", nullable = false)

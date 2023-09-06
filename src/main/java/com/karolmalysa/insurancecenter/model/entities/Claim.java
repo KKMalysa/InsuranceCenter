@@ -15,7 +15,7 @@ import java.util.Date;
 public class Claim {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrementation
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "dateOfIncident", length = 50, unique = false, nullable = false)

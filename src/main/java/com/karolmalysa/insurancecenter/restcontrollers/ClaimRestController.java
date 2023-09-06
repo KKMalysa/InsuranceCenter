@@ -143,7 +143,7 @@ public class ClaimRestController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);  // Zakładając, że zdjęcie to JPEG
+        headers.setContentType(MediaType.IMAGE_JPEG);  // Zakładam, że obraz to JPEG
         headers.setContentDisposition(ContentDisposition.builder("attachment").filename("claim_image_" + claimId + ".jpg").build());
 
         return ResponseEntity.ok()

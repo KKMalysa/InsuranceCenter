@@ -2,7 +2,11 @@ package com.karolmalysa.insurancecenter.restcontrollers;
 
 import com.karolmalysa.insurancecenter.model.components.MotorcarComponnent;
 import com.karolmalysa.insurancecenter.model.dto.MotorcarDto;
+import com.karolmalysa.insurancecenter.model.entities.Insurance;
+import com.karolmalysa.insurancecenter.model.entities.Motorcar;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -35,6 +39,11 @@ public class MotorcarRestController {
     @GetMapping(value = "/by-year/{minYear}/{maxYear}", produces = "application/json")
     public List<MotorcarDto> findMotorcarsByYearBetween(@PathVariable("minYear") Long minYear, @PathVariable ("maxYear") Long maxYear) {
         return  motorcarComponnent.findByYearBetween(minYear, maxYear );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMotorcar(@PathVariable("id") Long id){
+        return new ResponseEntity<String>(Motorcar.deleteMotorcar(id), HttpStatus.OK);
     }
 
 

@@ -2,7 +2,10 @@ package com.karolmalysa.insurancecenter.restcontrollers;
 
 import com.karolmalysa.insurancecenter.model.components.EmployeeComponnent;
 import com.karolmalysa.insurancecenter.model.dto.EmployeeDto;
+import com.karolmalysa.insurancecenter.model.entities.Employee;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -29,6 +32,11 @@ public class EmployeeRestController {
     public List<EmployeeDto> findAllEmployeesWithPagination(@PathParam("page") Integer pageNumber, @PathParam("size") Integer pageSize) {
 
         return  employeeComponnent.findAll(pageNumber, pageSize);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteClient(@PathVariable("id") Long id){
+        return new ResponseEntity<String>(Employee.deleteEmployee(id), HttpStatus.OK);
     }
 
 }

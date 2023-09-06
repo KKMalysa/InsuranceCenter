@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -29,7 +28,8 @@ public class ClaimDto {
 
     private byte[] imageContent;
     private BigDecimal amount;
-    private LocalDate dateFiled;
+//    private LocalDate dateFiled;
+
 
 //    private  List<Long> employeeList;
 
@@ -69,8 +69,9 @@ public class ClaimDto {
         this.amount = amount;
     }
 
-    public void setDateFiled(LocalDate dateFiled) {
-        this.dateFiled = dateFiled;
-    }
+//    public void setDateFiled(LocalDate dateFiled) {
+//        this.dateFiled = dateFiled;
+//    }
+
 
 }

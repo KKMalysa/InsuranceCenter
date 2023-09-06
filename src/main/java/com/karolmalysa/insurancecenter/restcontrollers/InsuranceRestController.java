@@ -3,7 +3,10 @@ package com.karolmalysa.insurancecenter.restcontrollers;
 
 import com.karolmalysa.insurancecenter.model.components.InsuranceComponnent;
 import com.karolmalysa.insurancecenter.model.dto.InsuranceDto;
+import com.karolmalysa.insurancecenter.model.entities.Insurance;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -38,4 +41,8 @@ public class InsuranceRestController {
         return  insuranceComponnent.findByPriceBetween(minPrice, maxPrice );
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteInsurance(@PathVariable("id") Long id){
+        return new ResponseEntity<String>(Insurance.deleteInsurance(id), HttpStatus.OK);
+    }
 }
