@@ -56,11 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //for dev needs users
         auth.inMemoryAuthentication()
-                .withUser("KKM").password(encoder.encode("79988")).roles(String.valueOf(UserRoles.ADMIN))
+                .withUser("KKM").password(encoder.encode("79988"))
+                                                .roles(String.valueOf(UserRoles.ADMIN))
                 .and()
-                .withUser("user1").password(encoder.encode("1234")).roles(String.valueOf(UserRoles.USER))
+                .withUser("user1").password(encoder.encode("1234"))
+                                                .roles(String.valueOf(UserRoles.USER))
                 .and()
-                .withUser("client1").password(encoder.encode("1234")).roles(String.valueOf(UserRoles.CLIENT_PREMIUM));
+                .withUser("client1").password(encoder.encode("1234"))
+                                                .roles(String.valueOf(UserRoles.CLIENT_PREMIUM));
 
         auth.userDetailsService(employeeComponnent)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());

@@ -1,5 +1,6 @@
 package com.karolmalysa.insurancecenter.model.components;
 
+import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
 import com.karolmalysa.insurancecenter.model.dao.InsuranceRepository;
 import com.karolmalysa.insurancecenter.model.dto.InsuranceDto;
 import com.karolmalysa.insurancecenter.model.entities.Insurance;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InsuranceComponnent {
 
-    private final InsuranceRepository insuranceRepository;
+    private static InsuranceRepository insuranceRepository;
 
 
     public InsuranceDto saveInsurance (InsuranceDto insuranceDto) {
@@ -47,7 +48,13 @@ public class InsuranceComponnent {
 
     }
 
+    public static String deleteInsurance(Long id) {
+        Insurance insurance = insuranceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Insurance", "insuranceId", id.toString()));
+        insuranceRepository.delete(insurance);
 
+        return "Insurance data has been deleted successfully...";
+    }
 
 
 

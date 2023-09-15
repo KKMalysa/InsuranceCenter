@@ -34,7 +34,6 @@ public class ClaimComponnent {
         return claimRepository.findAll().stream()
                 .map(claim -> new ClaimDto(claim))
                 .collect(Collectors.toList());
-
     }
 
 
@@ -57,14 +56,26 @@ public class ClaimComponnent {
     }
 
     public Claim updateClaim(Claim claim, Long claimId) {
-        Claim claime = claimRepository.findById(claimId)
-                .orElseThrow(() -> new ResourceNotFoundException("Claim ", "Claim id", "" + claimId));
+        Claim existingClaim = claimRepository.findById(claimId)
+                .orElseThrow(() -> new ResourceNotFoundException("Claim ",
+                        "Claim id", "" + claimId));
         Claim newClaim = modelMapper.map(claim, Claim.class);
         newClaim.setId(claimId);
-        newClaim.setDateOfIncident(claime.getDateOfIncident());
+        newClaim.setDateOfIncident(existingClaim.getDateOfIncident());
 
         return claimRepository.save(newClaim);
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
