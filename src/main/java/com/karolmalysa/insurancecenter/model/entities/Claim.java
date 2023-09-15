@@ -35,10 +35,6 @@ public class Claim {
     @Lob
     private byte[] imageContent;
 
-
-//    @OneToMany(mappedBy = "claim")
-//    private List<Employee> employeeList;
-
     @ManyToOne
     @JoinColumn(name = "idInsurance", nullable = false)
     private Insurance insurance;

@@ -2,8 +2,6 @@ package com.karolmalysa.insurancecenter.restcontrollers;
 
 import com.karolmalysa.insurancecenter.model.components.MotorcarComponnent;
 import com.karolmalysa.insurancecenter.model.dto.MotorcarDto;
-import com.karolmalysa.insurancecenter.model.entities.Insurance;
-import com.karolmalysa.insurancecenter.model.entities.Motorcar;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +41,7 @@ public class MotorcarRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMotorcar(@PathVariable("id") Long id){
-        return new ResponseEntity<String>(Motorcar.deleteMotorcar(id), HttpStatus.OK);
+        return new ResponseEntity<String>(MotorcarComponnent.deleteMotorcar(id), HttpStatus.OK);
     }
 
 

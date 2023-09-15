@@ -1,0 +1,63 @@
+@startuml
+
+class CompanyClient {
+- Long id
+- String name
+- String surname
+- LocalDate dateOfBirth
+- String pesel
+- String address
+- String phone
+- String email
+- UserRoles role
+- String password
+- List<Motorcar> motorcarList
+}
+
+class Motorcar {
+- Long id
+- String brand
+- String model
+- String vin
+- String year
+- list<Insurance> insuranceList
+- CompanyClient companyClientId
+}
+
+class Insurance {
+- Long id
+- String name
+- Date startDate
+- Date endDate
+- Float price
+- List<Claim> claimList;
+- Motorcar motorcarId
+}
+
+class Employee {
+- Long id
+- String name
+- String surname
+- UserRoles role
+- String phone
+- String email
+- String password
+}
+
+class Claim {
+- Long id
+- Date dateOfIncident
+- String description
+- ClaimStatus claimStatus
+- byte fileContent
+- byte imageContent
+- Insurance insuranceId
+}
+
+
+CompanyClient "1 " -- "1..* " Motorcar :  have
+Motorcar "1 " -- "1..* " Insurance : have
+Insurance "1 " -- "1..* " Claim : have
+Employee "1 " -- "1..* " Claim : manages
+
+@enduml

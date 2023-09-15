@@ -24,10 +24,10 @@ public class CompanyClient {
     private Long id;
 
     @Column(name = "name", unique = false, nullable = false)
-    private String firstName;
+    private String name;
 
     @Column(name = "surname", unique = false, nullable = false)
-    private String lastName;
+    private String surname;
 
     @Column(name = "dateOfBirth", unique = false, nullable = true)
     private LocalDate dateOfBirth;

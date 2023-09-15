@@ -1,7 +1,5 @@
 package com.karolmalysa.insurancecenter.model.entities;
 
-import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
-import com.karolmalysa.insurancecenter.model.dao.MotorcarRepository;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -36,13 +34,6 @@ public class Motorcar {
     @JoinColumn(name = "idCompanyClient", nullable = false)
     private CompanyClient companyClient;
 
-    private static MotorcarRepository motorcarRepository;
 
-    public static String deleteMotorcar(Long id) {
-        Motorcar motorcar = motorcarRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Motorcar", "motorcarId", id.toString()));
-        motorcarRepository.delete(motorcar);
 
-        return "Motorcar data has been deleted successfully...";
-    }
 }

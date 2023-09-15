@@ -35,13 +35,4 @@ public class Insurance {
     @JoinColumn(name = "idMotorcar", nullable = false)
     private Motorcar motorcar;
 
-//    private static InsuranceRepository insuranceRepository;
-
-//    public static String deleteInsurance(Long id) {
-//        Insurance insurance = insuranceRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("Insurance", "insuranceId", id.toString()));
-//        insuranceRepository.delete(insurance);
-//
-//        return "Insurance data has been deleted successfully...";
-//    }
 }

@@ -11,7 +11,7 @@ public enum ClaimStatus {
     APPROVED("Approved"),
     DENIED("Denied");
 
-    private String displayName;
+    private final String displayName;
 
   
 }

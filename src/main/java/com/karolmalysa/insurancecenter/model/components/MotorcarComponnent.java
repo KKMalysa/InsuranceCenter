@@ -1,5 +1,6 @@
 package com.karolmalysa.insurancecenter.model.components;
 
+import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
 import com.karolmalysa.insurancecenter.model.dao.MotorcarRepository;
 import com.karolmalysa.insurancecenter.model.dto.MotorcarDto;
 import com.karolmalysa.insurancecenter.model.entities.Motorcar;
@@ -14,12 +15,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MotorcarComponnent {
 
-    private  final MotorcarRepository motorcarRepository;
+    private static MotorcarRepository motorcarRepository;
 
     public MotorcarDto saveMotorcar (MotorcarDto motorcarDto) {
         Motorcar motorcar = motorcarRepository.save(motorcarDto.createEntity());
 
         return new MotorcarDto(motorcar);
+    }
+    public static String deleteMotorcar(Long id) {
+        Motorcar motorcar = motorcarRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Motorcar", "motorcarId", id.toString()));
+        motorcarRepository.delete(motorcar);
+
+        return "Motorcar data has been deleted successfully...";
     }
 
     public List<MotorcarDto> findAll () {

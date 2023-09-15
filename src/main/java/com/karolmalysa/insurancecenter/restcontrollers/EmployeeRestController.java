@@ -2,7 +2,6 @@ package com.karolmalysa.insurancecenter.restcontrollers;
 
 import com.karolmalysa.insurancecenter.model.components.EmployeeComponnent;
 import com.karolmalysa.insurancecenter.model.dto.EmployeeDto;
-import com.karolmalysa.insurancecenter.model.entities.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class EmployeeRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable("id") Long id){
-        return new ResponseEntity<String>(Employee.deleteEmployee(id), HttpStatus.OK);
+        return new ResponseEntity<String>(EmployeeComponnent.deleteEmployee(id), HttpStatus.OK);
     }
 
 }

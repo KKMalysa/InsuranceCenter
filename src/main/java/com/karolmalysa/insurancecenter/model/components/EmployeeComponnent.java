@@ -1,5 +1,6 @@
 package com.karolmalysa.insurancecenter.model.components;
 
+import com.karolmalysa.insurancecenter.exception.ResourceNotFoundException;
 import com.karolmalysa.insurancecenter.model.dao.EmployeeRepository;
 import com.karolmalysa.insurancecenter.model.dto.EmployeeDto;
 import com.karolmalysa.insurancecenter.model.entities.Employee;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeComponnent implements UserDetailsService {
 
-    private final EmployeeRepository employeeRepository;
+    private static EmployeeRepository employeeRepository;
 
 
     public EmployeeDto saveEmployee (EmployeeDto employeeDto) {
@@ -32,6 +33,14 @@ public class EmployeeComponnent implements UserDetailsService {
                 .map(EmployeeDto::new)
                 .collect(Collectors.toList());
 
+    }
+
+    public static String deleteEmployee(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee", "employeeId", id.toString()));
+        employeeRepository.delete(employee);
+
+        return "Employee data has been deleted successfully...";
     }
 
     public List<EmployeeDto> findAll (Integer pageNumber, Integer pageSize) {

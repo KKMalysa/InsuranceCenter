@@ -65,8 +65,8 @@ public class CompanyClientDto {
 
         CompanyClient companyClient = new CompanyClient();
 
-        companyClient.setFirstName(this.firstName);
-        companyClient.setLastName(this.lastName);
+        companyClient.setName(this.firstName);
+        companyClient.setSurname(this.lastName);
         companyClient.setPesel(this.pesel);
         companyClient.setRole(this.role);
         companyClient.setAddress(this.address);
@@ -79,8 +79,8 @@ public class CompanyClientDto {
 
     public CompanyClientDto(CompanyClient companyClient) {
         this.id = companyClient.getId();
-        this.firstName = companyClient.getFirstName();
-        this.lastName = companyClient.getLastName();
+        this.firstName = companyClient.getName();
+        this.lastName = companyClient.getSurname();
        this.pesel = companyClient.getPesel();
        this.role = companyClient.getRole();
        this.address = companyClient.getAddress();
